@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pide Tapalpa · Tu pedido, cerca de ti</title>
+<meta name="description" content="Comida, abarrotes, mandados y encargos de Costco y Sam's entregados a tu puerta en todo el municipio de Tapalpa, Jalisco.">
+<meta property="og:title" content="Pide Tapalpa">
+<meta property="og:description" content="Lo que necesites en Tapalpa, hasta tu puerta. Pedidos, mandados y encargos de Costco y Sam's.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta name="theme-color" content="#00311E">
+<link rel="icon" type="image/png" href="logo-verde.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Paleta de marca Pide Tapalpa */
+    --bosque:#00311E;
+    --petroleo:#0F4C5C;
+    --oliva:#556B2F;
+    --beige:#EFF7E5;
+    --gris-oscuro:#1F2937;
+    /* Derivados */
+    --pino:var(--bosque);
+    --pino-2:var(--petroleo);
+    --pino-3:var(--oliva);
+    --ocre:var(--beige);
+    --ocre-claro:#FFFFFF;
+    --neblina:#F6FAF0;
+    --piedra:#D8E2CC;
+    --tinta:var(--gris-oscuro);
+    --gris:#4B5563;
+    --blanco:#FFFFFF;
+    --display:"Poppins", system-ui, sans-serif;
+    --texto:"Poppins", system-ui, sans-serif;
+    --ancho:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--neblina);color:var(--tinta);font-family:var(--texto);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  img,svg{display:block;max-width:100%}
+  a{color:inherit}
+  :focus-visible{outline:3px solid #8FB35A;outline-offset:3px;border-radius:4px}
+  .envoltura{max-width:var(--ancho);margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.15;margin:0;letter-spacing:-.02em}
+  h2{font-size:clamp(2rem,4.2vw,3rem)}
+  h3{font-size:1.4rem}
+  p{margin:0}
+
+  /* Encabezado */
+  .encabezado{position:sticky;top:0;z-index:20;background:var(--pino);color:var(--neblina);border-bottom:1px solid rgba(236,238,232,.12)}
+  .encabezado .envoltura{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+  .marca{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:var(--display);font-weight:600;font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase}
+  .marca img{width:auto;height:38px}
+  .marca small{display:block;font-size:.58rem;font-weight:500;letter-spacing:.22em;opacity:.75;margin-top:2px}
+  .nav{display:flex;align-items:center;gap:28px;font-size:.95rem}
+  .nav a{text-decoration:none;opacity:.85}
+  .nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+  .boton{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font-weight:600;font-size:1rem;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+  .boton-ocre{background:var(--beige);color:var(--bosque)}
+  .boton-ocre:hover{background:var(--ocre-claro)}
+  .boton-linea{border-color:rgba(236,238,232,.5);color:var(--neblina)}
+  .boton-linea:hover{border-color:var(--neblina);background:rgba(236,238,232,.08)}
+  .boton-pino{background:var(--pino);color:var(--neblina)}
+  .boton-pino:hover{background:var(--pino-2)}
+  .boton svg{width:20px;height:20px;flex:none}
+  .nav .boton{min-height:40px;padding:0 18px;opacity:1}
+  .nav .boton:hover{text-decoration:none}
+
+  /* Portada */
+  .portada{background:var(--pino);color:var(--neblina);overflow:hidden}
+  .portada .envoltura{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:48px;padding-top:72px;padding-bottom:88px}
+  .portada h1{font-size:clamp(2.4rem,5.4vw,4.2rem);font-weight:600}
+  .portada .bajada{margin-top:24px;font-size:1.2rem;max-width:34ch;color:rgba(236,238,232,.85)}
+  .portada .acciones{margin-top:36px;display:flex;flex-wrap:wrap;gap:14px}
+  .portada .nota{margin-top:28px;font-size:.95rem;color:rgba(236,238,232,.65)}
+
+  .mapa{position:relative;width:100%;max-width:500px;margin-left:auto}
+  .mapa .anillo{fill:none;stroke:rgba(236,238,232,.22);stroke-width:1.2}
+  .mapa .anillo-relleno{fill:rgba(236,238,232,.035)}
+  .mapa .etiqueta{font-family:var(--texto);font-size:12.5px;fill:rgba(236,238,232,.75)}
+  .mapa .precio{font-family:var(--display);font-weight:600;font-size:21px;fill:#FFFFFF}
+  .mapa .ruta{fill:none;stroke:#A9C77A;stroke-width:2.2;stroke-dasharray:2 7;stroke-linecap:round}
+  .mapa .moto{offset-path:path("M200 200 C 238 170, 262 196, 285 165 S 330 128, 352 104");offset-rotate:0deg;animation:recorrido 5.5s cubic-bezier(.45,.05,.4,1) infinite}
+  @keyframes recorrido{0%,8%{offset-distance:0%;opacity:0}14%{opacity:1}82%{offset-distance:100%;opacity:1}100%{offset-distance:100%;opacity:0}}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .mapa .moto{animation:none;offset-distance:60%}
+  }
+
+  /* Secciones */
+  .seccion{padding:104px 0}
+  .seccion .intro{max-width:620px}
+  .seccion .intro p{margin-top:18px;color:var(--gris);font-size:1.1rem}
+
+  /* Servicios */
+  .servicios{margin-top:56px;display:grid;grid-template-columns:1.25fr 1fr;gap:20px}
+  .servicio{background:var(--blanco);border:1px solid var(--piedra);border-radius:20px;padding:32px}
+  .servicio p{margin-top:12px;color:var(--gris)}
+  .servicio .icono{width:48px;height:48px;margin-bottom:22px;color:var(--pino)}
+  .servicio-principal{grid-row:span 2;background:var(--pino-2);color:var(--neblina);border-color:var(--pino-2);display:flex;flex-direction:column;justify-content:space-between;min-height:360px}
+  .servicio-principal h3{font-size:1.8rem}
+  .servicio-principal p{color:rgba(236,238,232,.85);font-size:1.1rem;max-width:36ch}
+  .servicio-principal .icono{color:#A9D3DD;width:56px;height:56px}
+  .servicio-costco{grid-column:1 / -1;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:28px;background:var(--oliva);border-color:var(--oliva);color:#FFFFFF}
+  .servicio-costco p{color:rgba(255,255,255,.88);max-width:58ch}
+  .servicio-costco .icono{margin:0;color:var(--beige)}
+  .servicio-costco .viajes{font-family:var(--display);font-weight:600;font-size:1.05rem;text-align:right;line-height:1.25}
+  .servicio-costco .viajes span{display:block;font-size:2.2rem;color:var(--beige)}
+
+  /* Cómo funciona */
+  .como{background:var(--blanco);border-top:1px solid var(--piedra);border-bottom:1px solid var(--piedra)}
+  .pasos{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:paso;position:relative}
+  .pasos::before{content:"";position:absolute;top:27px;left:28px;right:12%;border-top:2px dashed var(--piedra)}
+  .paso{position:relative;padding-right:28px;counter-increment:paso}
+  .paso::before{content:counter(paso);display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--pino);color:var(--neblina);font-family:var(--display);font-weight:600;font-size:1.35rem;position:relative;margin-bottom:24px}
+  .paso:last-child::before{background:var(--oliva);color:#FFFFFF}
+  .paso h3{font-size:1.25rem}
+  .paso p{margin-top:10px;color:var(--gris);font-size:1rem}
+
+  /* Zonas */
+  .zonas .envoltura{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .regla{margin-top:40px}
+  .regla .barra{height:16px;border-radius:999px;background:linear-gradient(90deg,#00311E 0 16.66%,#0F4C5C 16.66% 33.33%,#2E6B63 33.33% 50%,#556B2F 50% 66.66%,#7F9456 66.66% 83.33%,#A9BB86 83.33% 100%)}
+  .regla .extremos{display:flex;justify-content:space-between;margin-top:14px;gap:16px}
+  .regla .extremo strong{display:block;font-family:var(--display);font-weight:600;font-size:2rem;line-height:1}
+  .regla .extremo span{font-size:.95rem;color:var(--gris)}
+  .regla .extremo:last-child{text-align:right}
+  .datos{display:grid;gap:16px}
+  .dato{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;padding:22px 24px;border-radius:16px;background:var(--blanco);border:1px solid var(--piedra)}
+  .dato svg{width:28px;height:28px;color:var(--pino);margin-top:2px}
+  .dato p{color:var(--gris);font-size:1rem}
+  .dato strong{color:var(--tinta);display:block;font-weight:600;margin-bottom:2px}
+  .dato-destacado{background:#E6EFD6;border-color:#C3D3A6}
+  .dato-destacado svg{color:var(--oliva)}
+
+  /* Únete */
+  .unete{background:var(--petroleo);color:#FFFFFF}
+  .unete .intro p{color:rgba(236,238,232,.8)}
+  .paneles{margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .panel{border:1px solid rgba(236,238,232,.18);border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:16px}
+  .panel h3{font-size:1.75rem}
+  .panel ul{margin:0;padding:0;list-style:none;display:grid;gap:10px;color:rgba(236,238,232,.85)}
+  .panel li{display:flex;gap:10px}
+  .panel li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:#A9C77A;margin-top:10px}
+  .panel .boton{margin-top:auto;align-self:flex-start}
+
+  /* Descarga */
+  .descarga .caja{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;background:var(--blanco);border:1px solid var(--piedra);border-radius:28px;padding:56px}
+  .tiendas{display:grid;gap:14px}
+  .tienda{display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:16px;border:1.5px solid var(--piedra);text-decoration:none;background:var(--neblina)}
+  .tienda svg{width:30px;height:30px;flex:none}
+  .tienda strong{display:block;font-size:1.05rem}
+  .tienda span{font-size:.9rem;color:var(--gris)}
+  a.tienda:hover{border-color:var(--pino)}
+  .tienda[aria-disabled="true"]{opacity:.75;cursor:default}
+
+  /* Pie */
+  .pie{background:var(--gris-oscuro);color:rgba(236,238,232,.7);padding:48px 0;font-size:.95rem}
+  .pie .envoltura{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .pie .marca{color:#FFFFFF}
+  .pie a{text-decoration:none}
+  .pie a:hover{text-decoration:underline}
+
+  /* Botón flotante WhatsApp */
+  .flotante{position:fixed;right:20px;bottom:20px;z-index:30;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(23,32,27,.25)}
+  .flotante svg{width:32px;height:32px}
+
+  @media (max-width:960px){
+    .nav a:not(.boton){display:none}
+    .portada .envoltura{grid-template-columns:1fr;padding-top:48px;padding-bottom:64px}
+    .mapa{margin:0 auto;max-width:420px}
+    .servicios{grid-template-columns:1fr}
+    .servicio-principal{grid-row:auto;min-height:0}
+    .servicio-costco{grid-template-columns:1fr}
+    .servicio-costco .viajes{text-align:left}
+    .pasos{grid-template-columns:1fr 1fr;row-gap:44px}
+    .pasos::before{display:none}
+    .zonas .envoltura{grid-template-columns:1fr;gap:40px}
+    .paneles{grid-template-columns:1fr}
+    .descarga .caja{grid-template-columns:1fr;padding:36px 28px}
+  }
+  @media (max-width:560px){
+    body{font-size:16px}
+    .envoltura{padding:0 16px}
+    .seccion{padding:72px 0}
+    .portada .acciones .boton{width:100%}
+    .pasos{grid-template-columns:1fr}
+    .paso{padding-right:0}
+    .servicio,.panel{padding:26px}
+    .regla .extremo strong{font-size:1.7rem}
+  }
+</style>
+</head>
+<body>
+
+<header class="encabezado">
+  <div class="envoltura">
+    <a class="marca" href="#inicio" aria-label="Pide Tapalpa, inicio">
+      <img src="logo-blanco.png" alt="" width="29" height="38">
+      <span>Pide Tapalpa<small>Tu pedido, cerca de ti</small></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#zonas">Zonas</a>
+      <a href="#unete">Negocios y repartidores</a>
+      <a class="boton boton-ocre" href="#descarga">Descargar la app</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <section class="portada">
+    <div class="envoltura">
+      <div>
+        <h1>Lo que necesites en Tapalpa, hasta tu puerta.</h1>
+        <p class="bajada">Comida, abarrotes, mandados y encargos de Costco y Sam's, entregados por repartidores de aquí.</p>
+        <div class="acciones">
+          <a class="boton boton-ocre" href="#descarga">Descargar la app</a>
+          <a class="boton boton-linea js-whatsapp" href="#" data-mensaje="Hola, quiero hacer un pedido con Pide Tapalpa">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg>
+            Pedir por WhatsApp
+          </a>
+        </div>
+        <p class="nota">Tu pedido, cerca de ti. Entregamos en todo el municipio de Tapalpa.</p>
+      </div>
+
+      <div class="mapa" role="img" aria-label="Mapa de zonas de entrega: seis anillos alrededor del centro de Tapalpa, desde 30 pesos en el centro hasta 150 pesos en la zona más lejana.">
+        <svg viewBox="0 0 400 400" aria-hidden="true">
+          <circle class="anillo anillo-relleno" cx="200" cy="200" r="186"/>
+          <circle class="anillo" cx="200" cy="200" r="156"/>
+          <circle class="anillo" cx="200" cy="200" r="126"/>
+          <circle class="anillo" cx="200" cy="200" r="96"/>
+          <circle class="anillo" cx="200" cy="200" r="66"/>
+          <circle class="anillo" cx="200" cy="200" r="36" style="fill:rgba(169,199,122,.16);stroke:rgba(169,199,122,.7)"/>
+          <!-- pinos -->
+          <g fill="rgba(236,238,232,.16)">
+            <path d="M80 300l10-22 10 22zM88 312l12-26 12 26zM300 318l9-20 9 20zM312 306l11-24 11 24zM70 120l9-20 9 20zM96 92l8-18 8 18zM118 336l8-17 8 17zM262 60l8-18 8 18z"/>
+          </g>
+          <path class="ruta" d="M200 200 C 238 170, 262 196, 285 165 S 330 128, 352 104"/>
+          <!-- casa destino -->
+          <g transform="translate(344 82)">
+            <path d="M2 14 L12 4 L22 14 V26 H2 Z" fill="#EFF7E5"/>
+            <rect x="9" y="17" width="6" height="9" fill="#00311E"/>
+          </g>
+          <!-- plaza -->
+          <circle cx="200" cy="200" r="7" fill="#EFF7E5"/>
+          <circle cx="200" cy="200" r="13" fill="none" stroke="#A9C77A" stroke-width="1.5" opacity=".6"/>
+          <text class="etiqueta" x="200" y="232" text-anchor="middle">Centro</text>
+          <text class="precio" x="200" y="252" text-anchor="middle">$30</text>
+          <text class="etiqueta" x="86" y="372">Ferretería de Tula</text>
+          <text class="precio" x="86" y="394" style="font-size:19px">$150</text>
+          <!-- repartidor -->
+          <g class="moto">
+            <circle r="11" fill="#EFF7E5"/>
+            <circle r="4" fill="#00311E"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="servicios">
+    <div class="envoltura">
+      <div class="intro">
+        <h2>Una sola app para lo de todos los días.</h2>
+        <p>Pide a los comercios del pueblo, manda a hacer un encargo o junta tu lista grande para la próxima vuelta a la ciudad.</p>
+      </div>
+
+      <div class="servicios">
+        <article class="servicio servicio-principal">
+          <div>
+            <svg class="icono" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 20h32l-3 20H11z"/><path d="M16 20c0-6 3.5-10 8-10s8 4 8 10"/><path d="M19 28v5M29 28v5"/></svg>
+            <h3>Pedidos de comercios locales</h3>
+          </div>
+          <p>Comida, abarrotes y lo que vendan los negocios de Tapalpa. El comercio prepara tu pedido y un repartidor te lo lleva.</p>
+        </article>
+
+        <article class="servicio">
+          <svg class="icono" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="34" r="6"/><circle cx="36" cy="34" r="6"/><path d="M13 34l7-14h9l7 14M20 20l-3-6h-5M29 20l3-6h5"/></svg>
+          <h3>Mandados</h3>
+          <p>¿Necesitas que alguien vaya por algo? Te lo traemos y le pagas al repartidor al recibir, en efectivo o con tarjeta.</p>
+        </article>
+
+        <article class="servicio">
+          <svg class="icono" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 6l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1z"/></svg>
+          <h3>Recomendaciones</h3>
+          <p>Descubre negocios de Tapalpa que vale la pena conocer, con sus promociones y novedades dentro de la app.</p>
+        </article>
+
+        <article class="servicio servicio-costco">
+          <svg class="icono" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h6l5 20h22l5-14H13"/><circle cx="18" cy="39" r="3"/><circle cx="34" cy="39" r="3"/></svg>
+          <div>
+            <h3>Encargos de Costco y Sam's</h3>
+            <p>Haz tu lista desde la app. Nuestro equipo junta los pedidos, va a la tienda y te lo entrega en la fecha del siguiente viaje.</p>
+          </div>
+          <p class="viajes"><span>2 a 3</span>viajes al mes</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion como" id="como-funciona">
+    <div class="envoltura">
+      <div class="intro">
+        <h2>Así llega tu pedido.</h2>
+        <p>Sabes en qué va tu pedido en cada momento, desde que lo haces hasta que tocan tu puerta.</p>
+      </div>
+      <ol class="pasos">
+        <li class="paso">
+          <h3>Elige y pide</h3>
+          <p>Escoge el comercio, arma tu pedido y pon tu dirección.</p>
+        </li>
+        <li class="paso">
+          <h3>El comercio lo prepara</h3>
+          <p>El negocio acepta tu pedido y empieza a prepararlo.</p>
+        </li>
+        <li class="paso">
+          <h3>Un repartidor va por él</h3>
+          <p>Un repartidor de Tapalpa lo recoge y sale hacia tu casa.</p>
+        </li>
+        <li class="paso">
+          <h3>Te avisamos que llegó</h3>
+          <p>Recibes una notificación cuando el repartidor está afuera.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="seccion zonas" id="zonas">
+    <div class="envoltura">
+      <div>
+        <h2>El envío depende de qué tan lejos estés.</h2>
+        <p style="margin-top:18px;color:var(--gris);font-size:1.1rem;max-width:46ch">Dividimos el municipio en seis zonas según la distancia desde el centro. La app te dice el costo exacto antes de confirmar.</p>
+        <div class="regla" aria-label="Costo de envío: de 30 pesos en la zona 1 a 150 pesos en la zona 6">
+          <div class="barra"></div>
+          <div class="extremos">
+            <div class="extremo"><strong>$30</strong><span>Zona 1 · Tapalpa centro</span></div>
+            <div class="extremo"><strong>$150</strong><span>Zona 6 · Ferretería de Tula</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="datos">
+        <div class="dato">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <p><strong>Todo el municipio de Tapalpa</strong>Entregamos a direcciones dentro del municipio, hasta 25 km del centro.</p>
+        </div>
+        <div class="dato">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+          <p><strong>Paga como prefieras</strong>Efectivo o tarjeta al recibir tu pedido.</p>
+        </div>
+        <div class="dato dato-destacado">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg>
+          <p><strong>Envío gratis en CardoSanto</strong>Si vives en CardoSanto, tus compras en la bodega del condominio no pagan envío. Marca tu dirección como CardoSanto en la app y la validamos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion unete" id="unete">
+    <div class="envoltura">
+      <div class="intro">
+        <h2>Crezcamos juntos en Tapalpa.</h2>
+        <p>Pide Tapalpa funciona gracias a los negocios y repartidores del pueblo. Si quieres sumarte, escríbenos.</p>
+      </div>
+      <div class="paneles">
+        <article class="panel">
+          <h3>Vende en la app</h3>
+          <ul>
+            <li>Recibe pedidos en tu celular y acepta los que puedas preparar.</li>
+            <li>Consulta cuánto se cobró en efectivo y cuánto está pendiente de pago.</li>
+            <li>Aparece en Recomendaciones para que más gente te conozca.</li>
+          </ul>
+          <a class="boton boton-ocre js-whatsapp" href="#" data-mensaje="Hola, tengo un negocio en Tapalpa y quiero vender en Pide Tapalpa">Registrar mi negocio</a>
+        </article>
+        <article class="panel">
+          <h3>Reparte con nosotros</h3>
+          <ul>
+            <li>Recibe avisos de pedidos listos cerca de ti.</li>
+            <li>Gana por cada entrega según la zona.</li>
+            <li>Trabaja en tu pueblo, con tus propios horarios.</li>
+          </ul>
+          <a class="boton boton-ocre js-whatsapp" href="#" data-mensaje="Hola, quiero ser repartidor de Pide Tapalpa">Quiero ser repartidor</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion descarga" id="descarga">
+    <div class="envoltura">
+      <div class="caja">
+        <div>
+          <h2>Descarga Pide Tapalpa.</h2>
+          <p style="margin-top:18px;color:var(--gris);font-size:1.1rem;max-width:42ch">Mientras sale la app en tu teléfono, puedes hacer tu pedido por WhatsApp.</p>
+          <a class="boton boton-pino js-whatsapp" style="margin-top:28px" href="#" data-mensaje="Hola, quiero hacer un pedido con Pide Tapalpa">Pedir por WhatsApp</a>
+        </div>
+        <div class="tiendas">
+          <a class="tienda" id="tienda-android" href="#" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="#00311E" aria-hidden="true"><path d="M17.6 9.5 19.4 6.4a.4.4 0 0 0-.7-.4l-1.8 3.1a11 11 0 0 0-9.8 0L5.3 6a.4.4 0 0 0-.7.4l1.8 3.1A10.4 10.4 0 0 0 1 18h22a10.4 10.4 0 0 0-5.4-8.5ZM7 15.3a1 1 0 1 1 1-1 1 1 0 0 1-1 1Zm10 0a1 1 0 1 1 1-1 1 1 0 0 1-1 1Z"/></svg>
+            <div><strong>Android</strong><span class="estado">Muy pronto en Google Play</span></div>
+          </a>
+          <a class="tienda" id="tienda-iphone" href="#" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="#00311E" aria-hidden="true"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9a4.8 4.8 0 0 0-3.8-2c-1.6-.2-3.1.9-3.9.9s-2-.9-3.4-.9a5 5 0 0 0-4.2 2.6c-1.8 3.1-.5 7.7 1.3 10.2.8 1.2 1.8 2.6 3.1 2.5s1.7-.8 3.2-.8 1.9.8 3.2.8 2.2-1.3 3-2.5a10.5 10.5 0 0 0 1.4-2.8 4.3 4.3 0 0 1-2.1-4.1ZM13.9 5c.7-.8 1.1-1.9 1-3a4.3 4.3 0 0 0-2.8 1.5 4 4 0 0 0-1 2.9 3.6 3.6 0 0 0 2.8-1.4Z"/></svg>
+            <div><strong>iPhone</strong><span class="estado">Muy pronto en App Store</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <div class="envoltura">
+    <a class="marca" href="#inicio">
+      <img src="logo-blanco.png" alt="" width="29" height="38">
+      <span>Pide Tapalpa<small>Tu pedido, cerca de ti</small></span>
+    </a>
+    <p>Tapalpa, Jalisco · Un proyecto de Grupo RALZ</p>
+    <p><a class="js-whatsapp" href="#" data-mensaje="Hola, tengo una pregunta sobre Pide Tapalpa">Contacto por WhatsApp</a> · © <span id="anio">2026</span></p>
+  </div>
+</footer>
+
+<a class="flotante js-whatsapp" href="#" data-mensaje="Hola, quiero hacer un pedido con Pide Tapalpa" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg>
+</a>
+
+<script>
+  /* ============================================
+     AJUSTES — cambia solo estos datos
+     ============================================ */
+  const AJUSTES = {
+    // Número de WhatsApp con lada de país, sin espacios ni signos (52 + 10 dígitos)
+    whatsapp: "523325371743",
+    // Cuando la app esté publicada, pega aquí los enlaces de las tiendas
+    googlePlay: "",
+    appStore: ""
+  };
+
+  document.querySelectorAll(".js-whatsapp").forEach(function (a) {
+    const texto = encodeURIComponent(a.dataset.mensaje || "Hola");
+    a.href = "https://wa.me/" + AJUSTES.whatsapp + "?text=" + texto;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
+
+  [["tienda-android", AJUSTES.googlePlay, "Disponible en Google Play"],
+   ["tienda-iphone", AJUSTES.appStore, "Disponible en App Store"]].forEach(function (t) {
+    const el = document.getElementById(t[0]);
+    if (t[1]) {
+      el.href = t[1];
+      el.removeAttribute("aria-disabled");
+      el.target = "_blank";
+      el.rel = "noopener";
+      el.querySelector(".estado").textContent = t[2];
+    } else {
+      el.addEventListener("click", function (e) { e.preventDefault(); });
+    }
+  });
+
+  document.getElementById("anio").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
